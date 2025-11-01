@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="web3_payment_checkout" name="Web3 / Stripe Checkout">
+    <t t-call="website.layout">
+      <div class="container mt16">
+        <h1>Unified Checkout</h1>
+        <form id="odoo_web3_checkout" action="#" method="post">
+          <div>
+            <label><input type="radio" name="method" value="web3" checked="checked"/> Web3 Wallet</label>
+            <label><input type="radio" name="method" value="stripe"/> Stripe Card</label>
+          </div>
+          <div id="web3_section">
+            <p>Connect your wallet in the browser using a dApp connector (example only).</p>
+            <input type="text" name="wallet_address" placeholder="0x..."/>
+            <input type="text" name="chain" placeholder="ethereum"/>
+          </div>
+          <div id="stripe_section" style="display:none;">
+            <p>Stripe checkout will open in a new window.</p>
+          </div>
+          <div>
+            <input type="number" name="amount" step="0.01" placeholder="Amount"/>
+            <button type="button" id="start_payment">Pay</button>
+          </div>
+        </form>
+        <script>
+          (function(){
+            var form = document.getElementById('odoo_web3_checkout');
+            var start = document.getElementById('start_payment');
+            start.addEventListener('click', function(){
+              var data = new FormData(form);
+              var payload = {};
+              data.forEach(function(v,k){payload[k]=v});
+              // call Odoo json endpoint
+              fetch('/odoo_web3_payments/api/initiate', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(payload)
+              }).then(function(r){return r.json()}).then(function(d){
+                alert('Payment initiated: ' + JSON.stringify(d));
+              });
+            });
+          })();
+        </script>
+      </div>
+    </t>
+  </template>
+</odoo>

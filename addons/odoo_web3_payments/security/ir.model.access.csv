@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_transaction_extended_user,payment.transaction.extended.user,model_payment_transaction_extended,,1,1,1,1

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_payment_transaction_extended_tree" model="ir.ui.view">
+    <field name="name">payment.transaction.extended.tree</field>
+    <field name="model">payment.transaction.extended</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="chain"/>
+        <field name="wallet_address"/>
+        <field name="stripe_session_id"/>
+        <field name="status"/>
+        <field name="amount"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_payment_transaction_extended_form" model="ir.ui.view">
+    <field name="name">payment.transaction.extended.form</field>
+    <field name="model">payment.transaction.extended</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="chain"/>
+            <field name="wallet_address"/>
+            <field name="tx_hash"/>
+            <field name="stripe_session_id"/>
+            <field name="status"/>
+            <field name="amount"/>
+            <field name="currency_id"/>
+            <field name="metadata"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <menuitem id="menu_odoo_web3_payments_root" name="Web3 & Stripe Payments"/>
+  <menuitem id="menu_payment_transactions" name="Transactions" parent="menu_odoo_web3_payments_root"/>
+
+  <record id="action_payment_transaction_extended" model="ir.actions.act_window">
+    <field name="name">Payments Extended</field>
+    <field name="res_model">payment.transaction.extended</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_payment_transaction_extended_tree"/>
+  </record>
+
+  <menuitem id="menu_payment_transactions_action" name="List" parent="menu_payment_transactions" action="action_payment_transaction_extended"/>
+</odoo>

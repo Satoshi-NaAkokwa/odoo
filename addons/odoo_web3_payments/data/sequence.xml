@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="seq_payment_transaction_extended" model="ir.sequence">
+    <field name="name">Payment Transaction Extended</field>
+    <field name="code">payment.transaction.extended</field>
+    <field name="prefix">PTE</field>
+    <field name="padding">6</field>
+    <field name="number_next">1</field>
+  </record>
+</odoo>
